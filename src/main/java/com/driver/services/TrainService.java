@@ -110,7 +110,7 @@ public class TrainService {
         List<Ticket> tickets = train.getBookedTickets();
 
         for (Ticket ticketList : tickets) {
-            if (ticketList.getFromStation().equals(station))
+            if (ticketList.getFromStation().toString().equals(station.toString()))
                 count+=ticketList.getPassengersList().size();
         }
         return count;
@@ -123,19 +123,18 @@ public class TrainService {
         //We need to find out the age of the oldest person that is travelling the train
         //If there are no people travelling in that train you can return 0
 
-        Train train = trainRepository.findById(trainId).get();
-        int oldestAge = 0;
-        List<Ticket> ticketList = train.getBookedTickets();
+        Train train= trainRepository.findById(trainId).get();
+        int oldPerson=0;
 
-        for(Ticket t : ticketList){
-            for(Passenger p : t.getPassengersList()){
-                if(p.getAge()>oldestAge){
-                    oldestAge = p.getAge();
+        List<Ticket> ticketList= train.getBookedTickets();
+        for(Ticket tickets: ticketList){
+            for(Passenger passenger: tickets.getPassengersList()){
+                if(passenger.getAge()>oldPerson){
+                    oldPerson=passenger.getAge();
                 }
             }
         }
-
-        return oldestAge;
+        return oldPerson;
     }
 
     public List<Integer> trainsBetweenAGivenTime(Station station, LocalTime startTime, LocalTime endTime){
