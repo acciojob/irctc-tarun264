@@ -110,8 +110,8 @@ public class TrainService {
         List<Ticket> tickets = train.getBookedTickets();
 
         for (Ticket ticketList : tickets) {
-            if (ticketList.getFromStation().toString().equals(station.toString()))
-                count++;
+            if (ticketList.getFromStation().equals(station))
+                count+=ticketList.getPassengersList().size();
         }
         return count;
     }
