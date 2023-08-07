@@ -99,7 +99,7 @@ public class TrainService {
 
         boolean passing = false;
         for (String station1 : stations) {
-            if (station1.equals(station)) {
+            if (station1.equals(station.toString())) {
                 passing = true;
             }
         }
